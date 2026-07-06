@@ -18,7 +18,7 @@ mongoose.connect(process.env.MONGO_URI)
 })
 
 app.use(cors({
-    origin: "http://localhost:5173",
+    origin: "https://recipe-list-chi.vercel.app",
     credentials: true
 }));
 app.use(express.json())

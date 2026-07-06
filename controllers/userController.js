@@ -21,7 +21,6 @@ exports.userRegister =async(req,res)=>{
         if(userRecord){
             return res.status(400).json({message:"email already exists"})
         }
-        console.log(req.body)
 
         const hashePassword = await bcrypt.hash(password ,10)
 
@@ -42,7 +41,6 @@ exports.userRegister =async(req,res)=>{
 exports.userLogin=async(req ,res)=>{
     try {
         const {email ,password} = req.body;
-        console.log(req.body)
 
         const userRecord = await User.findOne({email})
         console.log(userRecord)
