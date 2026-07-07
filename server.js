@@ -17,8 +17,24 @@ mongoose.connect(process.env.MONGO_URI)
     console.log("somthing wrong" , error.message)
 })
 
+// app.use(cors({
+//     origin: "https://recipe-list-chi.vercel.app",
+//     credentials: true
+// }));
+
+const allowedOrigins = [
+    "http://localhost:5173",
+    "https://recipe-list-chi.vercel.app"
+];
+
 app.use(cors({
-    origin: "recipe-list-chi.vercel.app",
+    origin: function(origin, callback) {
+        if (!origin || allowedOrigins.includes(origin)) {
+            callback(null, true);
+        } else {
+            callback(new Error("Not allowed by CORS"));
+        }
+    },
     credentials: true
 }));
 app.use(express.json())
